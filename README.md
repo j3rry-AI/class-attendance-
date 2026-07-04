@@ -34,7 +34,7 @@ The Class Attendance System streamlines the attendance tracking process in educa
   - Geofencing with configurable radius
   - Input sanitization and validation
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Layer | Technologies |
 |-------|--------------|
@@ -141,7 +141,7 @@ npm run dev
 - Lecturers can start sessions from the "Take Attendance" page
 - Students can check in from their dashboard
 
-## 📖 Usage Guide
+##  Usage Guide
 
 ### For Lecturers
 1. **Start a Session**
@@ -191,7 +191,7 @@ npm run dev
 - `POST /api/auth/login` - Login and receive JWT token
 - `POST /api/auth/logout` - Logout
 
-## 🏗 Architecture Highlights
+##  Architecture Highlights
 
 ### Session Management (SQLite)
 - Sessions inserted with SQL datetime triggers
@@ -209,7 +209,7 @@ npm run dev
 - Migrations run at server startup via `initDb.js`
 - Database connection via Node.js native `DatabaseSync`
 
-## 📊 Data Flow
+##  Data Flow
 
 ```
 Lecturer Starts Session
@@ -251,7 +251,7 @@ cd frontend
 npm test
 ```
 
-## 📝 Notes
+##  Notes
 
 - The backend uses SQLite's synchronous API for simplicity and guaranteed atomicity
 - Session duration defaults to 30 minutes; configurable via request body
@@ -265,7 +265,7 @@ npm test
 3. Push to branch: `git push origin feature/your-feature`
 4. Open a pull request
 
-## 📄 License
+##  License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
@@ -276,7 +276,7 @@ For issues or questions:
 - Create a new issue with detailed description and steps to reproduce
 - Include terminal output and browser console errors
 
-## 🔄 Roadmap
+##  Roadmap
 
 - [ ] PostgreSQL migration option
 - [ ] Email/SMS notifications via Nodemailer/Twilio
