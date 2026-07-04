@@ -1,0 +1,376 @@
+  console.log
+    ✅ Database initialized
+
+      at log (index.js:2248:11)
+
+  console.log
+    📍 Default Geofence: (7.300735, 5.137691) radius: 120m
+
+      at log (index.js:2249:11)
+
+  console.log
+    🚀 Node backend running on http://127.0.0.1:3000
+
+      at log (index.js:2250:11)
+
+  console.log
+    
+    📋 Available Endpoints:
+
+      at log (index.js:2251:11)
+
+  console.log
+       🔐 POST   /api/login (with login attempts tracking)
+
+      at log (index.js:2252:11)
+
+  console.log
+       🔒 GET    /api/security-settings
+
+      at log (index.js:2253:11)
+
+  console.log
+       🔒 POST   /api/security-settings
+
+      at log (index.js:2254:11)
+
+  console.log
+       ✉️ POST   /api/send-otp
+
+      at log (index.js:2255:11)
+
+  console.log
+       📝 POST   /api/users/register
+
+      at log (index.js:2256:11)
+
+  console.log
+       👑 POST   /api/admin/register-simple
+
+      at log (index.js:2257:11)
+
+  console.log
+       📸 POST   /api/users/add-face
+
+      at log (index.js:2258:11)
+
+  console.log
+       🧠 POST   /api/users/register-face (face descriptor)
+
+      at log (index.js:2259:11)
+
+  console.log
+       🧠 GET    /api/users/:reg_number/face-descriptor
+
+      at log (index.js:2260:11)
+
+  console.log
+       🧠 DELETE /api/users/:reg_number/face-descriptor
+
+      at log (index.js:2261:11)
+
+  console.log
+       📍 GET    /api/geo-locations
+
+      at log (index.js:2262:11)
+
+  console.log
+       📍 POST   /api/geo-locations
+
+      at log (index.js:2263:11)
+
+  console.log
+       📍 PUT    /api/geo-locations/activate/:id
+
+      at log (index.js:2264:11)
+
+  console.log
+       ✅ POST   /api/attendance/checkin
+
+      at log (index.js:2265:11)
+
+  console.log
+       👥 GET    /api/admin/users
+
+      at log (index.js:2266:11)
+
+  console.log
+       👥 POST   /api/admin/users
+
+      at log (index.js:2267:11)
+
+  console.log
+       📚 GET    /api/courses
+
+      at log (index.js:2268:11)
+
+  console.log
+       📚 POST   /api/courses
+
+      at log (index.js:2269:11)
+
+  console.log
+       📊 GET    /api/dashboard/stats/:role
+
+      at log (index.js:2270:11)
+
+  console.log
+       📊 GET    /api/student/attendance-report
+
+      at log (index.js:2271:11)
+
+  console.log
+       👤 GET    /api/users/:regNumber/profile
+
+      at log (index.js:2272:11)
+
+  console.log
+       👤 PUT    /api/users/:regNumber/profile
+
+      at log (index.js:2273:11)
+
+  console.log
+       📚 GET    /api/users/:regNumber/my-courses
+
+      at log (index.js:2274:11)
+
+  console.log
+       � GET    /api/users/:regNumber/available-courses
+
+      at log (index.js:2275:11)
+
+  console.log
+       ✅ POST   /api/users/:regNumber/enroll
+
+      at log (index.js:2276:11)
+
+  console.log
+       🗑️ DELETE /api/users/:regNumber/enroll/:courseId
+
+      at log (index.js:2277:11)
+
+  console.log
+       �🔐 POST   /api/users/:regNumber/change-password
+
+      at log (index.js:2278:11)
+
+  console.log
+    
+       👨‍🏫 LECTURER ENDPOINTS:
+
+      at log (index.js:2280:11)
+
+  console.log
+       👤 GET    /api/lecturer/:regNumber/profile
+
+      at log (index.js:2281:11)
+
+  console.log
+       👤 PUT    /api/lecturer/:regNumber/profile
+
+      at log (index.js:2282:11)
+
+  console.log
+       📚 GET    /api/lecturer/:regNumber/courses
+
+      at log (index.js:2283:11)
+
+  console.log
+       👥 GET    /api/lecturer/:regNumber/course/:courseId/students
+
+      at log (index.js:2284:11)
+
+  console.log
+       📊 GET    /api/lecturer/:regNumber/attendance-report
+
+      at log (index.js:2285:11)
+
+  console.log
+       📝 POST   /api/lecturer/attendance/bulk
+
+      at log (index.js:2286:11)
+
+  console.log
+    
+       🎓 SESSION & NOTIFICATION ENDPOINTS:
+
+      at log (index.js:2288:11)
+
+  console.log
+       🎯 POST   /api/lecturer/sessions/start
+
+      at log (index.js:2289:11)
+
+  console.log
+       🔚 PUT    /api/lecturer/sessions/:sessionId/end
+
+      at log (index.js:2290:11)
+
+  console.log
+       🔍 GET    /api/lecturer/sessions/active
+
+      at log (index.js:2291:11)
+
+  console.log
+       📜 GET    /api/lecturer/sessions/history
+
+      at log (index.js:2292:11)
+
+  console.log
+       🔔 POST   /api/lecturer/send-notification
+
+      at log (index.js:2293:11)
+
+  console.log
+       📬 GET    /api/student/notifications
+
+      at log (index.js:2294:11)
+
+  console.log
+       📖 PUT    /api/student/notifications/:id/read
+
+      at log (index.js:2295:11)
+
+  console.log
+       ✅ POST   /api/student/session/join
+
+      at log (index.js:2296:11)
+
+  console.log
+    
+       👨‍🏫 LECTURER COURSE MANAGEMENT:
+
+      at log (index.js:2298:11)
+
+  console.log
+       📚 POST   /api/lecturer/courses
+
+      at log (index.js:2299:11)
+
+  console.log
+       📝 PUT    /api/lecturer/courses/:id
+
+      at log (index.js:2300:11)
+
+  console.log
+       🗑️ DELETE /api/lecturer/courses/:id
+
+      at log (index.js:2301:11)
+
+  console.log
+    
+       👑 ADMIN ENDPOINTS:
+
+      at log (index.js:2303:11)
+
+  console.log
+       📊 GET    /api/admin/stats
+
+      at log (index.js:2304:11)
+
+  console.log
+       📊 GET    /api/admin/activity-logs
+
+      at log (index.js:2305:11)
+
+  console.log
+       📤 POST   /api/admin/bulk-import
+
+      at log (index.js:2306:11)
+
+  console.log
+       📅 GET    /api/admin/academic-settings
+
+      at log (index.js:2307:11)
+
+  console.log
+       📅 PUT    /api/admin/academic-settings
+
+      at log (index.js:2308:11)
+
+(node:3224) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL tests/api.test.js (6.218 s)
+  Basic API tests
+    × GET /api/security-settings returns settings (4 ms)
+    × POST /api/users/register allows student signup without email or photo
+    × POST /api/admin/register-simple can create a user (1 ms)
+    × full auth flow: login and access /api/me (1 ms)
+    × attendance checkin with file upload and OTP
+
+  ● Basic API tests › GET /api/security-settings returns settings
+
+    TypeError: db.init is not a function
+
+    [0m [90m 4 |[39m
+     [90m 5 |[39m beforeAll([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 6 |[39m   [36mawait[39m db[33m.[39minit()[33m;[39m
+     [90m   |[39m            [31m[1m^[22m[39m
+     [90m 7 |[39m   [36mawait[39m [36mnew[39m [33mPromise[39m(resolve [33m=>[39m setTimeout(resolve[33m,[39m [35m250[39m))[33m;[39m
+     [90m 8 |[39m })[33m;[39m
+     [90m 9 |[39m[0m
+
+      at Object.init (tests/api.test.js:6:12)
+
+  ● Basic API tests › POST /api/users/register allows student signup without email or photo
+
+    TypeError: db.init is not a function
+
+    [0m [90m 4 |[39m
+     [90m 5 |[39m beforeAll([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 6 |[39m   [36mawait[39m db[33m.[39minit()[33m;[39m
+     [90m   |[39m            [31m[1m^[22m[39m
+     [90m 7 |[39m   [36mawait[39m [36mnew[39m [33mPromise[39m(resolve [33m=>[39m setTimeout(resolve[33m,[39m [35m250[39m))[33m;[39m
+     [90m 8 |[39m })[33m;[39m
+     [90m 9 |[39m[0m
+
+      at Object.init (tests/api.test.js:6:12)
+
+  ● Basic API tests › POST /api/admin/register-simple can create a user
+
+    TypeError: db.init is not a function
+
+    [0m [90m 4 |[39m
+     [90m 5 |[39m beforeAll([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 6 |[39m   [36mawait[39m db[33m.[39minit()[33m;[39m
+     [90m   |[39m            [31m[1m^[22m[39m
+     [90m 7 |[39m   [36mawait[39m [36mnew[39m [33mPromise[39m(resolve [33m=>[39m setTimeout(resolve[33m,[39m [35m250[39m))[33m;[39m
+     [90m 8 |[39m })[33m;[39m
+     [90m 9 |[39m[0m
+
+      at Object.init (tests/api.test.js:6:12)
+
+  ● Basic API tests › full auth flow: login and access /api/me
+
+    TypeError: db.init is not a function
+
+    [0m [90m 4 |[39m
+     [90m 5 |[39m beforeAll([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 6 |[39m   [36mawait[39m db[33m.[39minit()[33m;[39m
+     [90m   |[39m            [31m[1m^[22m[39m
+     [90m 7 |[39m   [36mawait[39m [36mnew[39m [33mPromise[39m(resolve [33m=>[39m setTimeout(resolve[33m,[39m [35m250[39m))[33m;[39m
+     [90m 8 |[39m })[33m;[39m
+     [90m 9 |[39m[0m
+
+      at Object.init (tests/api.test.js:6:12)
+
+  ● Basic API tests › attendance checkin with file upload and OTP
+
+    TypeError: db.init is not a function
+
+    [0m [90m 4 |[39m
+     [90m 5 |[39m beforeAll([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 6 |[39m   [36mawait[39m db[33m.[39minit()[33m;[39m
+     [90m   |[39m            [31m[1m^[22m[39m
+     [90m 7 |[39m   [36mawait[39m [36mnew[39m [33mPromise[39m(resolve [33m=>[39m setTimeout(resolve[33m,[39m [35m250[39m))[33m;[39m
+     [90m 8 |[39m })[33m;[39m
+     [90m 9 |[39m[0m
+
+      at Object.init (tests/api.test.js:6:12)
+
+Test Suites: 1 failed, 1 total
+Tests:       5 failed, 5 total
+Snapshots:   0 total
+Time:        6.497 s
+Ran all test suites matching /tests\\api.test.js/i.
+{"numFailedTestSuites":1,"numFailedTests":5,"numPassedTestSuites":0,"numPassedTests":0,"numPendingTestSuites":0,"numPendingTests":0,"numRuntimeErrorTestSuites":0,"numTodoTests":0,"numTotalTestSuites":1,"numTotalTests":5,"openHandles":[],"snapshot":{"added":0,"didUpdate":false,"failure":false,"filesAdded":0,"filesRemoved":0,"filesRemovedList":[],"filesUnmatched":0,"filesUpdated":0,"matched":0,"total":0,"unchecked":0,"uncheckedKeysByFile":[],"unmatched":0,"updated":0},"startTime":1782862689118,"success":false,"testResults":[{"assertionResults":[{"ancestorTitles":["Basic API tests"],"duration":4,"failureDetails":[{}],"failureMessages":["TypeError: db.init is not a function\n    at Object.init (C:\\Users\\USER\\Documents\\attend new\\node-backend\\tests\\api.test.js:6:12)\n    at Promise.then.completed (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusHook (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:281:40)\n    at _runTestsForDescribeBlock (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:95:7)\n    at run (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)"],"fullName":"Basic API tests GET /api/security-settings returns settings","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"GET /api/security-settings returns settings"},{"ancestorTitles":["Basic API tests"],"duration":0,"failureDetails":[{}],"failureMessages":["TypeError: db.init is not a function\n    at Object.init (C:\\Users\\USER\\Documents\\attend new\\node-backend\\tests\\api.test.js:6:12)\n    at Promise.then.completed (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusHook (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:281:40)\n    at _runTestsForDescribeBlock (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:95:7)\n    at run (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)"],"fullName":"Basic API tests POST /api/users/register allows student signup without email or photo","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"POST /api/users/register allows student signup without email or photo"},{"ancestorTitles":["Basic API tests"],"duration":1,"failureDetails":[{}],"failureMessages":["TypeError: db.init is not a function\n    at Object.init (C:\\Users\\USER\\Documents\\attend new\\node-backend\\tests\\api.test.js:6:12)\n    at Promise.then.completed (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusHook (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:281:40)\n    at _runTestsForDescribeBlock (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:95:7)\n    at run (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)"],"fullName":"Basic API tests POST /api/admin/register-simple can create a user","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"POST /api/admin/register-simple can create a user"},{"ancestorTitles":["Basic API tests"],"duration":1,"failureDetails":[{}],"failureMessages":["TypeError: db.init is not a function\n    at Object.init (C:\\Users\\USER\\Documents\\attend new\\node-backend\\tests\\api.test.js:6:12)\n    at Promise.then.completed (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusHook (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:281:40)\n    at _runTestsForDescribeBlock (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:95:7)\n    at run (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)"],"fullName":"Basic API tests full auth flow: login and access /api/me","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"full auth flow: login and access /api/me"},{"ancestorTitles":["Basic API tests"],"duration":0,"failureDetails":[{}],"failureMessages":["TypeError: db.init is not a function\n    at Object.init (C:\\Users\\USER\\Documents\\attend new\\node-backend\\tests\\api.test.js:6:12)\n    at Promise.then.completed (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusHook (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:281:40)\n    at _runTestsForDescribeBlock (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:95:7)\n    at run (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (C:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (c:\\Users\\USER\\Documents\\attend new\\node-backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)"],"fullName":"Basic API tests attendance checkin with file upload and OTP","invocations":1,"location":null,"numPassingAsserts":0,"retryReasons":[],"status":"failed","title":"attendance checkin with file upload and OTP"}],"endTime":1782862695602,"message":"  ● Basic API tests › GET /api/security-settings returns settings\n\n    TypeError: db.init is not a function\n\n    \u001b[0m \u001b[90m 4 |\u001b[39m\n     \u001b[90m 5 |\u001b[39m beforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   \u001b[36mawait\u001b[39m db\u001b[33m.\u001b[39minit()\u001b[33m;\u001b[39m\n     \u001b[90m   |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 7 |\u001b[39m   \u001b[36mawait\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mPromise\u001b[39m(resolve \u001b[33m=>\u001b[39m setTimeout(resolve\u001b[33m,\u001b[39m \u001b[35m250\u001b[39m))\u001b[33m;\u001b[39m\n     \u001b[90m 8 |\u001b[39m })\u001b[33m;\u001b[39m\n     \u001b[90m 9 |\u001b[39m\u001b[0m\n\n      at Object.init (tests/api.test.js:6:12)\n\n  ● Basic API tests › POST /api/users/register allows student signup without email or photo\n\n    TypeError: db.init is not a function\n\n    \u001b[0m \u001b[90m 4 |\u001b[39m\n     \u001b[90m 5 |\u001b[39m beforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   \u001b[36mawait\u001b[39m db\u001b[33m.\u001b[39minit()\u001b[33m;\u001b[39m\n     \u001b[90m   |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 7 |\u001b[39m   \u001b[36mawait\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mPromise\u001b[39m(resolve \u001b[33m=>\u001b[39m setTimeout(resolve\u001b[33m,\u001b[39m \u001b[35m250\u001b[39m))\u001b[33m;\u001b[39m\n     \u001b[90m 8 |\u001b[39m })\u001b[33m;\u001b[39m\n     \u001b[90m 9 |\u001b[39m\u001b[0m\n\n      at Object.init (tests/api.test.js:6:12)\n\n  ● Basic API tests › POST /api/admin/register-simple can create a user\n\n    TypeError: db.init is not a function\n\n    \u001b[0m \u001b[90m 4 |\u001b[39m\n     \u001b[90m 5 |\u001b[39m beforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   \u001b[36mawait\u001b[39m db\u001b[33m.\u001b[39minit()\u001b[33m;\u001b[39m\n     \u001b[90m   |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 7 |\u001b[39m   \u001b[36mawait\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mPromise\u001b[39m(resolve \u001b[33m=>\u001b[39m setTimeout(resolve\u001b[33m,\u001b[39m \u001b[35m250\u001b[39m))\u001b[33m;\u001b[39m\n     \u001b[90m 8 |\u001b[39m })\u001b[33m;\u001b[39m\n     \u001b[90m 9 |\u001b[39m\u001b[0m\n\n      at Object.init (tests/api.test.js:6:12)\n\n  ● Basic API tests › full auth flow: login and access /api/me\n\n    TypeError: db.init is not a function\n\n    \u001b[0m \u001b[90m 4 |\u001b[39m\n     \u001b[90m 5 |\u001b[39m beforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   \u001b[36mawait\u001b[39m db\u001b[33m.\u001b[39minit()\u001b[33m;\u001b[39m\n     \u001b[90m   |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 7 |\u001b[39m   \u001b[36mawait\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mPromise\u001b[39m(resolve \u001b[33m=>\u001b[39m setTimeout(resolve\u001b[33m,\u001b[39m \u001b[35m250\u001b[39m))\u001b[33m;\u001b[39m\n     \u001b[90m 8 |\u001b[39m })\u001b[33m;\u001b[39m\n     \u001b[90m 9 |\u001b[39m\u001b[0m\n\n      at Object.init (tests/api.test.js:6:12)\n\n  ● Basic API tests › attendance checkin with file upload and OTP\n\n    TypeError: db.init is not a function\n\n    \u001b[0m \u001b[90m 4 |\u001b[39m\n     \u001b[90m 5 |\u001b[39m beforeAll(\u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n    \u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   \u001b[36mawait\u001b[39m db\u001b[33m.\u001b[39minit()\u001b[33m;\u001b[39m\n     \u001b[90m   |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n     \u001b[90m 7 |\u001b[39m   \u001b[36mawait\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mPromise\u001b[39m(resolve \u001b[33m=>\u001b[39m setTimeout(resolve\u001b[33m,\u001b[39m \u001b[35m250\u001b[39m))\u001b[33m;\u001b[39m\n     \u001b[90m 8 |\u001b[39m })\u001b[33m;\u001b[39m\n     \u001b[90m 9 |\u001b[39m\u001b[0m\n\n      at Object.init (tests/api.test.js:6:12)\n","name":"C:\\Users\\USER\\Documents\\attend new\\node-backend\\tests\\api.test.js","startTime":1782862689384,"status":"failed","summary":""}],"wasInterrupted":false}

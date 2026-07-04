@@ -1,0 +1,10 @@
+{
+  "pairs": [
+    {
+      "a": [0.0, 0.0, 0.0],
+      "b": [0.0, 0.0, 0.0],
+      "same": true
+    }
+  ],
+  "note": "Replace with real 128-d descriptor pairs. Each vector should be length 128. This is a placeholder."
+}

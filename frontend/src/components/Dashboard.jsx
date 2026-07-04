@@ -1,0 +1,827 @@
+// src/Dashboard.jsx - UPDATED with sidebar and Email OTP
+import React, { useState, useEffect, useRef } from 'react'
+import apiFetch from '../utils/api'
+import Sidebar from './Sidebar'
+import CameraApp from './CameraApp'
+import '../styles/dashboard.css'  
+import CreateUserForm from './admin/CreateUserForm';
+import ManageCourses from './admin/ManageCourses';
+import ManageLocations from './lecturer/ManageLocations';
+import LecturerProfile from './lecturer/LecturerProfile';   
+import LecturerReports from './lecturer/LecturerReports';   
+import LecturerManageCourses from './lecturer/LecturerManageCourses';
+import Profile from './Profile';
+import MyCourses from './MyCourses';
+import TakeAttendance from './TakeAttendance';
+import StudentAttendanceReport from './StudentAttendanceReport';
+import StudentList from './lecturer/StudentList';
+import Settings from './admin/Settings';
+
+function RegisterFace({ user }) {
+  const [registerStatus, setRegisterStatus] = useState('');
+  const displayReg = (typeof user === 'string') ? user : (user && user.reg_number);
+
+  return (
+    <div className="register-face-wrapper">
+      <div className="register-face-header">
+        <h2>📸 Register Your Face</h2>
+        <p>Position your face clearly in a well-lit area</p>
+      </div>
+
+      <div className="register-face-content">
+        <div className="camera-section">
+          <CameraApp
+            user={user}
+            regNumber={displayReg}
+            mode="register"
+            onSuccess={() => setRegisterStatus('✅ Registration successful!')}
+          />
+        </div>
+
+        <div className="register-form">
+          <div className="form-group">
+            <label>Student ID / Registration Number</label>
+            <input type="text" value={displayReg || ''} disabled className="disabled-input" />
+            <small>This ID will be linked to your face data</small>
+          </div>
+          {registerStatus && (
+            <div className={`status-message ${registerStatus.includes('✅') ? 'success' : 'error'}`}>
+              {registerStatus}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <style>{`
+        .register-face-wrapper { width: 100%; padding: 20px; }
+        .register-face-header { margin-bottom: 20px; }
+        .register-face-header h2 { margin: 0 0 8px 0; font-size: 1.8rem; color: #1a1a2e; }
+        .register-face-header p { margin: 0; font-size: 0.9rem; color: #6b7280; }
+        .register-face-content { display: flex; flex-wrap: wrap; gap: 24px; }
+        .camera-section { flex: 1; min-width: 300px; }
+        .register-form { flex: 1; min-width: 280px; background: #f9fafb; padding: 24px; border-radius: 12px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.85rem; color: #374151; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; }
+        .form-group small { display: block; margin-top: 6px; font-size: 11px; color: #6b7280; }
+        .disabled-input { background: #f3f4f6; color: #6b7280; cursor: not-allowed; }
+        .status-message { margin-top: 15px; padding: 12px; border-radius: 8px; text-align: center; font-size: 13px; }
+        .status-message.success { background: #d4edda; color: #155724; }
+        .status-message.error { background: #f8d7da; color: #721c24; }
+        @media (max-width: 768px) {
+          .register-face-wrapper { padding: 15px; }
+          .register-face-header h2 { font-size: 1.4rem; }
+          .register-face-content { flex-direction: column; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+
+
+function StudentHistory({ user, regNumber }) {
+  const [loading, setLoading] = useState(true);
+  const [attendanceRecords, setAttendanceRecords] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAttendanceHistory = async () => {
+      try {
+        // First get user ID
+        const usersRes = await fetch('http://localhost:3000/api/users');
+        const users = await usersRes.json();
+        const searchKey = regNumber || (user && (user.reg_number || user.name)) || (typeof user === 'string' ? user : null);
+        const currentUser = users.find(u => u.reg_number === searchKey || u.name === searchKey);
+        
+        if (currentUser) {
+          // Fetch attendance records for this user
+          const response = await fetch(`http://localhost:3000/api/attendance/user/${currentUser.id}`);
+          const data = await response.json();
+          
+          if (response.ok) {
+            setAttendanceRecords(data);
+          } else {
+            setError(data.error || 'Failed to load attendance history');
+          }
+        } else {
+          setError('User not found');
+        }
+      } catch (error) {
+        if (import.meta.env.DEV) console.error('Error fetching attendance history:', error);
+        setError('Network error. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (regNumber || user) {
+      fetchAttendanceHistory();
+    }
+  }, [user, regNumber]);
+
+  // Helper function to format date
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  };
+
+  // Helper function to format time
+  const formatTime = (dateString) => {
+    return new Date(dateString).toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  if (loading) {
+    return (
+      <div className="history-loading">
+        <div className="loading-spinner"></div>
+        <p>Loading attendance history...</p>
+        <style>{`
+          .history-loading {
+            text-align: center;
+            padding: 60px;
+          }
+          .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #4F46E5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+          }
+          @keyframes spin {
+            to { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="history-error">
+        <div className="error-icon">⚠️</div>
+        <h3>Unable to Load History</h3>
+        <p>{error}</p>
+        <style>{`
+          .history-error {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fef2f2;
+            border-radius: 16px;
+          }
+          .error-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  if (attendanceRecords.length === 0) {
+    return (
+      <div className="history-empty">
+        <div className="empty-icon">📭</div>
+        <h3>No Attendance Records</h3>
+        <p>You haven't marked any attendance yet.</p>
+        <style>{`
+          .history-empty {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9fafb;
+            border-radius: 16px;
+          }
+          .empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="history-header">
+        <h2>📅 Attendance History</h2>
+        <p>View all your attendance records</p>
+      </div>
+      
+      <div className="history-summary">
+        <div className="summary-stat">
+          <span className="stat-label">Total Records:</span>
+          <span className="stat-value">{attendanceRecords.length}</span>
+        </div>
+        <div className="summary-stat">
+          <span className="stat-label">Present:</span>
+          <span className="stat-value present">
+            {attendanceRecords.filter(r => r.status === 'present').length}
+          </span>
+        </div>
+        <div className="summary-stat">
+          <span className="stat-label">Absent:</span>
+          <span className="stat-value absent">
+            {attendanceRecords.filter(r => r.status === 'absent').length}
+          </span>
+        </div>
+        <div className="summary-stat">
+          <span className="stat-label">Late:</span>
+          <span className="stat-value late">
+            {attendanceRecords.filter(r => r.status === 'late').length}
+          </span>
+        </div>
+      </div>
+      
+      <div className="table-container">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Course</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {attendanceRecords.map((record) => (
+              <tr key={record.id}>
+                <td>{formatDate(record.timestamp)}</td>
+                <td>{record.course_id || record.course_code || 'General'}</td>
+                <td>{formatTime(record.timestamp)}</td>
+                <td>
+                  <span className={`status-badge ${record.status}`}>
+                    {record.status === 'present' ? '✅ Present' : 
+                     record.status === 'absent' ? '❌ Absent' : 
+                     record.status === 'late' ? '⏰ Late' : record.status}
+                  </span>
+                </td>
+                <td>{record.location_name || record.location || 'N/A'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <style>{`
+        .history-header {
+          margin-bottom: 24px;
+        }
+        .history-header h2 {
+          margin: 0 0 8px 0;
+          color: #1a1a2e;
+          font-size: 1.8rem;
+        }
+        .history-header p {
+          margin: 0;
+          color: #6b7280;
+        }
+        .history-summary {
+          display: flex;
+          gap: 24px;
+          margin-bottom: 24px;
+          padding: 16px 20px;
+          background: #f9fafb;
+          border-radius: 12px;
+          flex-wrap: wrap;
+        }
+        .summary-stat {
+          display: flex;
+          gap: 8px;
+          align-items: baseline;
+        }
+        .summary-stat .stat-label {
+          font-weight: 500;
+          color: #6b7280;
+        }
+        .summary-stat .stat-value {
+          font-weight: bold;
+          font-size: 1.2rem;
+          color: #1a1a2e;
+        }
+        .summary-stat .stat-value.present {
+          color: #10b981;
+        }
+        .summary-stat .stat-value.absent {
+          color: #ef4444;
+        }
+        .summary-stat .stat-value.late {
+          color: #f59e0b;
+        }
+        .table-container {
+          overflow-x: auto;
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .data-table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        .data-table th,
+        .data-table td {
+          padding: 14px 16px;
+          text-align: left;
+          border-bottom: 1px solid #e5e7eb;
+        }
+        .data-table th {
+          background: #f9fafb;
+          font-weight: 600;
+        }
+        .status-badge {
+          display: inline-block;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+        .status-badge.present {
+          background: #d1fae5;
+          color: #065f46;
+        }
+        .status-badge.absent {
+          background: #fee2e2;
+          color: #991b1b;
+        }
+        .status-badge.late {
+          background: #fed7aa;
+          color: #9a3412;
+        }
+        @media (max-width: 768px) {
+          .history-summary {
+            gap: 16px;
+          }
+          .data-table th,
+          .data-table td {
+            padding: 10px 12px;
+            font-size: 13px;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function StudentDashboard({ user, regNumber, onNavigate }) {
+  const displayName = typeof user === 'string' ? user : (user && (user.name || user.reg_number))
+
+  return (
+    <div className="student-dashboard">
+      <div className="welcome-card">
+        <h2>Welcome back, {displayName || 'Student'}!</h2>
+        <p>Use the menu or quick actions below to register face, check in, and view your attendance.</p>
+      </div>
+
+      <div className="student-actions-grid">
+        <button className="action-card" onClick={() => onNavigate('attendance')}>
+          <span>📍</span>
+          <div>
+            <strong>Check In</strong>
+            <p>Mark attendance with face recognition.</p>
+          </div>
+        </button>
+        <button className="action-card" onClick={() => onNavigate('register-face')}>
+          <span>📸</span>
+          <div>
+            <strong>Register Face</strong>
+            <p>Enroll your face for future check-ins.</p>
+          </div>
+        </button>
+        <button className="action-card" onClick={() => onNavigate('history')}>
+          <span>📅</span>
+          <div>
+            <strong>Attendance History</strong>
+            <p>Review past check-ins and class attendance.</p>
+          </div>
+        </button>
+        <button className="action-card" onClick={() => onNavigate('report')}>
+          <span>📈</span>
+          <div>
+            <strong>Full Report</strong>
+            <p>See your attendance performance.</p>
+          </div>
+        </button>
+      </div>
+
+      <style>{`
+        .student-dashboard {
+          display: grid;
+          gap: 24px;
+        }
+        .student-actions-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+        }
+        .action-card {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
+          border-radius: 16px;
+          padding: 20px;
+          cursor: pointer;
+          transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .action-card:hover {
+          border-color: #4F46E5;
+          transform: translateY(-1px);
+        }
+        .action-card span {
+          font-size: 28px;
+          line-height: 1;
+        }
+        .action-card strong {
+          display: block;
+          margin-bottom: 6px;
+          font-size: 1rem;
+        }
+        .action-card p {
+          margin: 0;
+          color: #6b7280;
+          font-size: 0.95rem;
+        }
+        @media (max-width: 768px) {
+          .student-actions-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+    </div>
+  )
+}
+
+function StudentCheckIn({ user, regNumber }) {
+  const displayReg = typeof user === 'string' ? user : (user && user.reg_number);
+  const [activeSessions, setActiveSessions] = useState([]);
+  const [sessionLoading, setSessionLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStudentActiveSessions = async () => {
+      setSessionLoading(true);
+      try {
+        const response = await fetch(`http://localhost:3000/api/student/sessions/active?reg_number=${encodeURIComponent(displayReg || regNumber || '')}`);
+        if (response.ok) {
+          const data = await response.json();
+          setActiveSessions(data.active_sessions || []);
+        } else {
+          setActiveSessions([]);
+        }
+      } catch (error) {
+        if (import.meta.env.DEV) console.error('Error loading active sessions:', error);
+        setActiveSessions([]);
+      } finally {
+        setSessionLoading(false);
+      }
+    };
+    if (displayReg || regNumber) {
+      fetchStudentActiveSessions();
+    }
+  }, [displayReg, regNumber]);
+
+  return (
+    <div className="student-checkin-wrapper">
+      <div className="checkin-header">
+        <h2>📍 Student Check In</h2>
+        <p>Use the camera to capture your face and record attendance.</p>
+      </div>
+      <div className="active-session-summary">
+        <h3>Active Class Sessions</h3>
+        {sessionLoading ? (
+          <p>Loading active sessions...</p>
+        ) : activeSessions.length > 0 ? (
+          <div className="session-list">
+            {activeSessions.map(session => (
+              <div key={session.id} className="session-card">
+                <div><strong>Course:</strong> {session.course_code || session.course_title || session.course_id}</div>
+                {session.location?.name && <div><strong>Location:</strong> {session.location.name}</div>}
+                <div><strong>Starts:</strong> {new Date(session.start_time).toLocaleTimeString()}</div>
+                <div><strong>Ends:</strong> {new Date(session.end_time).toLocaleTimeString()}</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No active class sessions available right now.</p>
+        )}
+      </div>
+      <CameraApp user={user} regNumber={displayReg} mode="checkin" />
+      <style>{`
+        .student-checkin-wrapper {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+        .checkin-header h2 {
+          margin: 0 0 8px 0;
+          color: #1a1a2e;
+        }
+        .checkin-header p {
+          margin: 0;
+          color: #6b7280;
+        }
+      `}</style>
+    </div>
+  )
+}
+
+// ========== LECTURER VIEWS ==========
+function LecturerDashboard({ user }) {
+  const [stats, setStats] = useState({
+    totalCourses: 0,
+    totalStudents: 0,
+    averageAttendance: 0,
+    courses: []
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLecturerStats = async () => {
+      try {
+        // derive a string identifier for the lecturer
+        const userKey = (typeof user === 'string') ? user : (user && (user.reg_number || user.id || user.name))
+        const displayName = (typeof user === 'string') ? user : (user && (user.name || user.reg_number))
+
+        // Fetch courses taught by lecturer
+        const coursesRes = await apiFetch(`/api/lecturer/${encodeURIComponent(userKey)}/courses`);
+        const coursesData = coursesRes.data;
+        
+        if (coursesRes.ok) {
+          let totalStudents = 0;
+          let totalAttendanceSum = 0;
+          let totalClassesCount = 0;
+          
+          // For each course, fetch students and calculate stats
+          for (const course of coursesData) {
+            const studentsRes = await apiFetch(`/api/lecturer/${encodeURIComponent(userKey)}/course/${course.id}/students`);
+            const studentsData = studentsRes.data;
+            
+            if (studentsRes.ok) {
+              totalStudents += studentsData.length;
+              
+              // Calculate average attendance for this course
+              const courseAttendanceSum = studentsData.reduce((sum, s) => sum + (s.attendance_percentage || 0), 0);
+              const courseAverage = studentsData.length > 0 ? courseAttendanceSum / studentsData.length : 0;
+              totalAttendanceSum += courseAverage;
+              totalClassesCount++;
+            }
+          }
+          
+          const averageAttendance = totalClassesCount > 0 ? Math.round(totalAttendanceSum / totalClassesCount) : 0;
+          
+          setStats({
+            totalCourses: coursesData.length,
+            totalStudents: totalStudents,
+            averageAttendance: averageAttendance,
+            courses: coursesData
+          });
+        }
+      } catch (error) {
+        if (import.meta.env.DEV) console.error('Error fetching lecturer stats:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (user) {
+      fetchLecturerStats();
+    }
+  }, [user]);
+
+  const userKeyDisplay = (typeof user === 'string') ? user : (user && (user.name || user.reg_number))
+
+  if (loading) {
+    return (
+      <div>
+        <div className="welcome-card">
+          <h2>Welcome, Lecturer {userKeyDisplay}!</h2>
+          <p>Loading your dashboard statistics...</p>
+        </div>
+        <div className="stats-grid">
+          <div className="stat-card"><div className="stat-value">...</div><div className="stat-label">Courses</div></div>
+          <div className="stat-card"><div className="stat-value">...</div><div className="stat-label">Students</div></div>
+          <div className="stat-card"><div className="stat-value">...</div><div className="stat-label">Avg Attendance</div></div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="welcome-card">
+        <h2>Welcome, Lecturer {userKeyDisplay}!</h2>
+        <p>Manage your classes and take attendance.</p>
+      </div>
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="stat-value">{stats.totalCourses}</div>
+          <div className="stat-label">Courses</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-value">{stats.totalStudents}</div>
+          <div className="stat-label">Students</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-value">{stats.averageAttendance}%</div>
+          <div className="stat-label">Avg Attendance</div>
+        </div>
+      </div>
+      
+      {/* Optional: Display course list */}
+      {stats.courses.length > 0 && (
+        <div style={{ marginTop: '30px', background: 'white', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+          <h3>Your Courses</h3>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '16px' }}>
+            {stats.courses.map(course => (
+              <div key={course.id} style={{ background: '#f9fafb', padding: '15px', borderRadius: '8px', flex: '1', minWidth: '200px' }}>
+                <div style={{ fontWeight: 'bold', color: '#4F46E5' }}>{course.code}</div>
+                <div style={{ fontSize: '14px', color: '#6b7280' }}>{course.title}</div>
+                <div style={{ fontSize: '12px', color: '#10b981', marginTop: '8px' }}>{course.credits} Units</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StudentListView() {
+  const [users, setUsers] = useState(null)
+  
+  React.useEffect(() => {
+    fetch('http://localhost:3000/api/users').then(r => r.json()).then(setUsers).catch(() => setUsers([]))
+  }, [])
+  
+  if (!users) return <div>Loading users...</div>
+  
+  return (
+    <div>
+      <h2>👥 Student List</h2>
+      <div className="users-grid">
+        {users.map(u => (
+          <div key={u.id} className="user-card">
+            <div className="user-avatar-large">👨‍🎓</div>
+            <div className="user-name">{u.name}</div>
+            <div className="user-id">{u.reg_number || u.id}</div>
+            <button className="small-btn">Mark Present</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+
+// ========== ADMIN VIEWS ==========
+function AdminDashboard() {
+  const [users, setUsers] = useState(null)
+  
+  React.useEffect(() => {
+    fetch('http://localhost:3000/api/users').then(r => r.json()).then(setUsers).catch(() => setUsers([]))
+  }, [])
+  
+  return (
+    <div>
+      <div className="welcome-card">
+        <h2>Admin Dashboard</h2>
+        <p>Manage users, courses, and system settings.</p>
+      </div>
+      <div className="stats-grid">
+        <div className="stat-card"><div className="stat-value">450</div><div className="stat-label">Students</div></div>
+        <div className="stat-card"><div className="stat-value">25</div><div className="stat-label">Lecturers</div></div>
+        <div className="stat-card"><div className="stat-value">15</div><div className="stat-label">Courses</div></div>
+      </div>
+    </div>
+  )
+}
+
+function ManageUsers() {
+  const [users, setUsers] = useState(null)
+  
+  React.useEffect(() => {
+    fetch('http://localhost:3000/api/users').then(r => r.json()).then(setUsers).catch(() => setUsers([]))
+  }, [])
+  
+  if (!users) return <div>Loading users...</div>
+  
+  return (
+    <div>
+      <h2>👥 Manage Users</h2>
+      <button className="add-btn">+ Add New User</button>
+      <table className="data-table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Role</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          {users.map(u => (
+            <tr key={u.id}>
+              <td>{u.reg_number || u.id}</td>
+              <td>{u.name}</td>
+              <td>{u.role || 'Student'}</td>
+              <td><button className="edit-btn">Edit</button> <button className="delete-btn">Delete</button></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+// ========== MAIN DASHBOARD COMPONENT ===========
+const SAVED_ACTIVE_MENU_KEY = 'savedActiveMenu'
+
+export default function Dashboard({ role, user, onNavigate }) {
+  const [activeMenu, setActiveMenu] = useState(() => {
+    return localStorage.getItem(SAVED_ACTIVE_MENU_KEY) || 'dashboard'
+  })
+
+  useEffect(() => {
+    localStorage.setItem(SAVED_ACTIVE_MENU_KEY, activeMenu)
+  }, [activeMenu])
+  
+  const handleSignOut = () => {
+    onNavigate('login')
+  }
+  
+  const renderContent = () => {
+    // Student views
+    if (role === 'student') {
+      const reg = typeof user === 'string' ? user : (user && user.reg_number);
+      switch(activeMenu) {
+        case 'dashboard': return <StudentDashboard user={user} regNumber={reg} onNavigate={onNavigate} />
+        case 'attendance': return <StudentCheckIn user={user} regNumber={reg} />
+        case 'register-face': return <RegisterFace user={user} />
+        case 'history': return <StudentHistory user={user} regNumber={reg} />
+        case 'report': return <StudentAttendanceReport user={user} regNumber={reg} />
+        case 'profile': return <Profile user={user} regNumber={reg} onNavigate={onNavigate} />
+        case 'my-courses': return <MyCourses user={user} regNumber={reg} />
+        default: return <StudentDashboard user={user} regNumber={reg} onNavigate={onNavigate} />
+      }
+    }
+    
+    // Lecturer views
+  if (role === 'lecturer') {
+  const regL = typeof user === 'string' ? user : (user && user.reg_number);
+  switch(activeMenu) {
+    case 'dashboard': return <LecturerDashboard user={user} />
+    case 'students': return <StudentList user={user} regNumber={regL} />
+    case 'take-attendance': return <TakeAttendance user={user} regNumber={regL} />
+    case 'geo-locations': return <ManageLocations user={user} regNumber={regL} />
+    case 'reports': return <LecturerReports user={user} regNumber={regL} />
+    case 'profile': return <LecturerProfile user={user} regNumber={regL} onNavigate={onNavigate} />
+    case 'my-courses': return <LecturerManageCourses user={user} regNumber={regL} />
+    default: return <LecturerDashboard user={user} />
+  }
+}
+    
+        // Admin views
+    if (role === 'admin') {
+      switch(activeMenu) {
+        case 'dashboard': return <AdminDashboard />
+        case 'manage-users':
+          return (
+            <div>
+              <CreateUserForm onUserCreated={() => {
+                if (window.refreshUsers) window.refreshUsers();
+              }} />
+              <hr style={{ margin: '30px 0' }} />
+              <ManageUsers />
+            </div>
+          )
+        case 'manage-courses':
+          return <ManageCourses />
+        case 'settings':  // ← ADD THIS CASE
+          return <Settings />
+        default: 
+          return <AdminDashboard />
+      }
+    }
+    return <StudentDashboard user={user} regNumber={user && user.reg_number} onNavigate={onNavigate} />
+  }
+  
+  return (
+    <div className="dashboard-layout">
+      <Sidebar 
+        role={role} 
+        activeMenu={activeMenu} 
+        onMenuChange={setActiveMenu}
+        onSignOut={handleSignOut}
+      />
+      <div className="dashboard-main">
+        <div className="dashboard-main-content">
+          {renderContent()}
+        </div>
+      </div>
+    </div>
+  )
+}

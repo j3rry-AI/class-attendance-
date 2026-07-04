@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "No-op",
+			"type": "shell",
+			"command": "echo \"noop\"",
+			"args": [],
+			"isBackground": false
+		},
+		{
+			"label": "backend-tests",
+			"type": "shell",
+			"command": "cd node-backend && $env:DATABASE_URL='postgresql://postgres:postgres@localhost:5432/postgres'; npm test -- --runInBand",
+			"args": [],
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

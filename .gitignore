@@ -1,0 +1,17 @@
+node_modules/
+**/node_modules/
+archive/
+frontend/archive/
+*.log
+dist/
+build/
+.env
+.env.*
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+__pycache__/
+*.pyc
+coverage/
+.vscode/

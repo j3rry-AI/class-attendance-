@@ -1,0 +1,15 @@
+{
+  "name": "attend-workspace",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd node-backend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently -k \"npm:dev:backend\" \"npm:dev:frontend\""
+  },
+  "dependencies": {
+    "react-router-dom": "^7.15.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}

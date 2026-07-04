@@ -1,0 +1,67 @@
+:root{
+	--bg1: #f6f8ff;
+	--bg2: #e9f0ff;
+	--card: #ffffff;
+	--accent: #4f46e5;
+	--muted: #6b7280;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body {
+	margin:0;
+	font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	background: linear-gradient(180deg,var(--bg1),var(--bg2));
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	padding:24px;
+	color:#0f172a;
+}
+
+.container{
+	width:100%;
+	max-width:920px;
+	background:var(--card);
+	border-radius:14px;
+	box-shadow:0 10px 30px rgba(15,23,42,0.08);
+	padding:24px;
+	display:flex;
+	gap:20px;
+	align-items:flex-start;
+	flex-direction:column;
+}
+
+.header{
+	display:flex;
+	width:100%;
+	align-items:center;
+	justify-content:space-between;
+}
+
+h1{font-size:20px;margin:0;color:var(--accent)}
+
+.media-wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;justify-content:center;width:100%;}
+
+video{border-radius:8px;border:1px solid rgba(15,23,42,0.06);max-width:100%;height:auto;display:block}
+
+#canvas{display:none}
+
+.controls{display:flex;flex-direction:column;gap:10px;width:100%;max-width:480px}
+
+input[type="text"], input[type="number"], input[type="password"], input#name, input#mfa_code{
+	width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6e9f2;background:#fbfbff;font-size:14px;color:#0f172a
+}
+
+button{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:none;font-weight:600;cursor:pointer}
+button.secondary{background:#eef2ff;color:var(--accent)}
+
+#status{margin-top:6px;color:var(--muted);font-size:14px}
+
+.meta{font-size:13px;color:var(--muted)}
+
+@media(min-width:800px){
+	.media-wrap{flex-direction:row}
+	.container{flex-direction:row;padding:28px}
+	.controls{max-width:320px}
+}
