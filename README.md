@@ -2,11 +2,11 @@
 
 A comprehensive full-stack attendance management platform designed for educational institutions, enabling lecturers to manage class sessions and students to check in with face-based verification.
 
-## 🎯 Overview
+##  Overview
 
 The Class Attendance System streamlines the attendance tracking process in educational settings by combining modern web technologies with secure face recognition. Lecturers can start class sessions and mark attendance, while students can check in using their registered face data. All data is persisted in SQLite with a clean, intuitive UI built on React.
 
-## ✨ Key Features
+##  Key Features
 
 - **Lecturer Dashboard**
   - Start and manage class sessions with automatic 30-minute session windows
@@ -43,7 +43,7 @@ The Class Attendance System streamlines the attendance tracking process in educa
 | **Database** | SQLite (node:sqlite), SQL migrations |
 | **Face Recognition** | Face.js library (browser-side detection) |
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 attend-new/
@@ -81,7 +81,7 @@ attend-new/
 └── package.json                 # Root package
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - **Node.js** 18+ ([Download](https://nodejs.org))
@@ -229,7 +229,7 @@ POST /api/attendance/checkin + INSERT INTO attendance
 Attendance record visible in reports
 ```
 
-## 🔒 Security Considerations
+##  Security Considerations
 
 - **Face Verification**: Liveness detection + euclidean distance matching
 - **Geofencing**: Optional location-based check-in restrictions
@@ -237,7 +237,7 @@ Attendance record visible in reports
 - **Input Sanitization**: Escape user inputs to prevent XSS
 - **Session Expiry**: Auto-expire sessions after configured duration
 
-## 🧪 Testing
+##  Testing
 
 Run backend tests:
 ```bash
@@ -258,7 +258,7 @@ npm test
 - Face descriptor version is tracked for future algorithm updates
 - Notifications are stored in appState; extend with Nodemailer/Twilio for email/SMS
 
-## 🤝 Contributing
+##  Contributing
 
 1. Create a feature branch: `git checkout -b feature/your-feature`
 2. Commit changes: `git commit -m "Add feature description"`
@@ -269,7 +269,7 @@ npm test
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+##  Support
 
 For issues or questions:
 - Check existing GitHub issues
@@ -286,4 +286,4 @@ For issues or questions:
 
 ---
 
-**Made with ❤️ for educational institutions**
+**Made with love for educational institutions**
