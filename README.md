@@ -1,10 +1,10 @@
 # Class Attendance System
 
-A comprehensive full-stack attendance management platform designed for educational institutions, enabling lecturers to manage class sessions and students to check in with face-based verification.
+A comprehensive full-stack attendance management platform designed for educational institutions, enabling lecturers to manage class sessions and students to check in with face-based verification within the set location by the lecturers.
 
 ##  Overview
 
-The Class Attendance System streamlines the attendance tracking process in educational settings by combining modern web technologies with secure face recognition. Lecturers can start class sessions and mark attendance, while students can check in using their registered face data. All data is persisted in SQLite with a clean, intuitive UI built on React.
+The Class Attendance System streamlines the attendance tracking process in educational settings by combining modern web technologies with secure face recognition. Lecturers can start class sessions and mark attendance, while students can check in using their registered face data within the set location by the lecturers. All data is persisted in SQLite with a clean, intuitive UI built on React.
 
 ##  Key Features
 
