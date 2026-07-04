@@ -172,7 +172,7 @@ npm run dev
    - Track your attendance percentage per course
    - Dispute missed sessions with proof (optional)
 
-## 🔌 API Endpoints
+##  API Endpoints
 
 ### Lecturer Routes
 - `POST /api/lecturer/sessions/start` - Start a new class session
